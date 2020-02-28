@@ -1,0 +1,17 @@
+---
+version: '3.0'
+
+services:
+  nginx-s3-proxy:
+    image: docker.io/w33dw0r7d/nginx-s3-proxy:v1
+    build:
+      context: ./
+      dockerfile: Dockerfile
+    hostname: nginx-s3-proxy
+    container_name: nginx-s3-proxy
+    ports:
+      - "8080:80"
+    volumes:
+      - ./sample.conf:/etc/nginx/conf.d/test.conf:ro
+      - ./htpasswd:/tmp/htpasswd:ro
+    restart: unless-stopped
